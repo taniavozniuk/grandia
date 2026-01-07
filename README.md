@@ -1,73 +1,67 @@
-# React + TypeScript + Vite
+# Makeup Products Table
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Опис завдання
 
-Currently, two official plugins are available:
+Створити додаток на React з використанням **Ant Design**, який відображає таблицю косметичних продуктів з API [Makeup API](http://makeup-api.herokuapp.com/).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Основні вимоги:
 
-## React Compiler
+- Таблиця з колонками:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+  - Зображення
+  - Назва
+  - Категорія
+  - Бренд
+  - Ціна
+  - Тип продукту
+  - **Розгортається рядок** з доступними кольорами продукту (swatches)
 
-## Expanding the ESLint configuration
+- Три перемикачі (Toggle Switches) для групування даних:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+  - За типом продукту (Product Type)
+  - За брендом (Brand)
+  - За категорією (Category)  
+    При увімкненні — дані групуються, з’являються розгортаємі секції.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Два мультиселекти (Multi Select Dropdown):
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+  - Фільтр за брендами
+  - Фільтр за тегами (tags)  
+    Фільтрація відбувається автоматично при зміні вибору.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- Використання **Ant Design** для всіх компонентів.
+- Дані завантажуються з публічного API: `http://makeup-api.herokuapp.com/api/v1/products.json`
+- Деплой на **Vercel**
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Використані технології
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **React** + **TypeScript**
+- **Ant Design** (v5) – для UI-компонентів
+- **Axios** – для HTTP-запитів
+- **Vite** – як інструмент збірки (швидкий dev server)
+- **Vercel** – для деплою
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Функціонал, що реалізовано
+
+- Завантаження всіх продуктів з Makeup API при старті
+- Фільтрація за брендами та тегами (з автоматичним оновленням списків у селектах)
+- Групування даних за одним або кількома критеріями одночасно (комбінація: тип | бренд | категорія)
+- Розгортаємі рядки з візуалізацією кольорів продукту (hex swatches + назва кольору)
+- Чистий та структурований код з використанням кастомних хуків та компонентів
+
+## Як запустити локально
+
+1. Клонуйте репозиторій:
+   ```bash
+   git clone <your-repo-url>
+   cd <project-folder>
+   ```
+2. Встановіть залежності:
+   ```bash
+   npm install
+   ```
+3. Запустіть dev-сервер:
+   ```bash
+   npm run dev
+   ```
+4. Відкрийте http://localhost:5173 (або порт, вказаний у консолі)
