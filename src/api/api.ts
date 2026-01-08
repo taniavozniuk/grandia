@@ -40,31 +40,6 @@ export const getProducts = async (
   }
 };
 
-// export const getAllBrands = async (): Promise<string[]> => {
-//   try {
-//     const response = await apiClient.get<Product[]>("/api/v1/products.json");
-//     const brands = response.data
-//       .map((p) => p.brand)
-//       .filter(Boolean) as string[];
-//     return [...new Set(brands)].sort();
-//   } catch (error) {
-//     console.log("Error fetching brands:", error);
-//     throw error;
-//   }
-// };
-
-// export const getAllTags = async (): Promise<string[]> => {
-//   try {
-//     const response = await apiClient.get<Product[]>("/api/v1/products.json");
-//     const tags = response.data
-//       .flatMap((p) => p.tag_list)
-//       .filter(Boolean) as string[];
-//     return [...new Set(tags)].sort();
-//   } catch (error) {
-//     console.log("Error fetching tags:", error);
-//     throw error;
-//   }
-// };
 export const getAllFilters = async (): Promise<{
   brands: string[];
   tags: string[];
