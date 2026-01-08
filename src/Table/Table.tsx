@@ -1,24 +1,29 @@
 import { Table } from "antd";
-import { useProductsHooks } from "../hooks/useProductsHook";
+import { type GroupedRecord } from "../hooks/useProductsHook";
 import { ProductColors } from "../ProductColor/ProductColors";
 import "./Table.css";
+import type { Product } from "../types/Products";
+import type { ColumnsType } from "antd/es/table";
+import type React from "react";
+import type { GroupRecord } from "../types/GroupRecord";
 
-interface GroupRecord {
-  key: string;
-  groupName: string;
-  items: Record<string, unknown>[];
+interface TableProps {
+  columns: ColumnsType<Product>;
+  groupedData: GroupedRecord[];
+  loading: boolean;
+  groupByType: boolean;
+  groupByBrand: boolean;
+  groupByCategory: boolean;
 }
 
-export const Tablets = () => {
-  const {
-    columns,
-    groupedData,
-    loading,
-    groupByType,
-    groupByBrand,
-    groupByCategory,
-  } = useProductsHooks();
-
+export const Tablets: React.FC<TableProps> = ({
+  columns,
+  groupedData,
+  loading,
+  groupByType,
+  groupByBrand,
+  groupByCategory,
+}) => {
   const hasGrouping = groupByType || groupByBrand || groupByCategory;
 
   return (

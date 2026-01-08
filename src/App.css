@@ -2,6 +2,7 @@
   min-height: 100vh;
   background: linear-gradient(to bottom, #f8fafc, #e2e8f0);
   padding: 32px 16px;
+  font-family: "Intel", sans-serif;
 }
 
 .app-header {
@@ -31,16 +32,26 @@
   margin: 0 auto;
 }
 
-.section-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 24px;
-  gap: 16px;
+.controls-section {
+  margin-bottom: 48px;
 }
 
-.section-icon {
-  font-size: 28px;
-  filter: drop-shadow(0 2px 4px rgba(79, 70, 229, 0.2));
+.controls-row {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.control-block {
+  flex: 1;
+  min-width: 320px;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
 }
 
 .section-title {
@@ -49,10 +60,11 @@
   color: #312e81;
   margin: 0;
   position: relative;
+  margin-bottom: 20px;
 }
 
 .section-title::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -8px;
   left: 0;

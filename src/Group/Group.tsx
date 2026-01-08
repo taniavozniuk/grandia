@@ -1,17 +1,24 @@
 import { Switch } from "antd";
-import { useProductsHooks } from "../hooks/useProductsHook";
 import "./Group.css";
+import type React from "react";
 
-export const Group = () => {
-  const {
-    groupByType,
-    setGroupByType,
-    groupByBrand,
-    setGroupByBrand,
-    groupByCategory,
-    setGroupByCategory,
-  } = useProductsHooks();
+interface GroupProps {
+  groupByType: boolean;
+  setGroupByType: (value: boolean) => void;
+  groupByBrand: boolean;
+  setGroupByBrand: (value: boolean) => void;
+  groupByCategory: boolean;
+  setGroupByCategory: (value: boolean) => void;
+}
 
+export const Group: React.FC<GroupProps> = ({
+  groupByType,
+  setGroupByType,
+  groupByBrand,
+  setGroupByBrand,
+  groupByCategory,
+  setGroupByCategory,
+}) => {
   return (
     <div className="group-minimal">
       <div className="group-switches">

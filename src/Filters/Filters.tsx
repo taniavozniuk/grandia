@@ -1,20 +1,28 @@
 import { Select } from "antd";
-import { useProductsHooks } from "../hooks/useProductsHook";
 import "./Filters.css";
+import type React from "react";
 
 const { Option } = Select;
 
-export const Filters = () => {
-  const {
-    selectedBrands,
-    setSelectedBrands,
-    allBrands,
+interface FiltersProps {
+  selectedBrands: string[];
+  setSelectedBrands: (brands: string[]) => void;
+  allBrands: string[];
 
-    selectedTags,
-    setSelectedTags,
-    allTags,
-  } = useProductsHooks();
+  selectedTags: string[];
+  setSelectedTags: (tags: string[]) => void;
+  allTags: string[];
+}
 
+export const Filters: React.FC<FiltersProps> = ({
+  selectedBrands,
+  setSelectedBrands,
+  allBrands,
+
+  selectedTags,
+  setSelectedTags,
+  allTags,
+}) => {
   return (
     <div className="filters-container">
       <div className="filters-group">
@@ -27,7 +35,6 @@ export const Filters = () => {
           value={selectedBrands}
           onChange={setSelectedBrands}
           className="filters-select"
-          optionFilterProp="children"
         >
           {allBrands.map((brand) => (
             <Option key={brand} value={brand}>
