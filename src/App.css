@@ -1,20 +1,67 @@
-body {
-  margin: 0;
-  padding: 0;
-  background-color: #f9f0e2;
+.app-container {
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #f8fafc, #e2e8f0);
+  padding: 32px 16px;
 }
 
-.main {
-  margin: 20px;
-}
-
-.ant-divider.title {
-  cursor: default;
-  margin: 0;
+.app-header {
   text-align: center;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: 600;
-  font-size: 25px;
-  line-height: 50px;
-  color: #0c0b09;
+  margin-bottom: 48px;
+}
+
+.app-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 12px 0;
+  letter-spacing: -0.5px;
+}
+
+.app-subtitle {
+  font-size: 17px;
+  color: #64748b;
+  margin: 0;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.app-main {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+  gap: 16px;
+}
+
+.section-icon {
+  font-size: 28px;
+  filter: drop-shadow(0 2px 4px rgba(79, 70, 229, 0.2));
+}
+
+.section-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #312e81;
+  margin: 0;
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(to right, #6366f1, #a78bfa);
+  border-radius: 2px;
+}
+
+.app-section {
+  margin-bottom: 48px;
 }

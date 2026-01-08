@@ -11,22 +11,25 @@ export const Group = () => {
     groupByCategory,
     setGroupByCategory,
   } = useProductsHooks();
+
   return (
-    <>
-      <div className="groupCon">
-        <label>
-          <Switch checked={groupByType} onChange={setGroupByType} /> За типом
-          продукту
+    <div className="group-minimal">
+      <div className="group-switches">
+        <label className="switch-item">
+          <Switch checked={groupByType} onChange={setGroupByType} />
+          <span className="switch-text">За типом продукту</span>
         </label>
-        <label>
-          <Switch checked={groupByBrand} onChange={setGroupByBrand} /> За
-          брендом
+
+        <label className="switch-item">
+          <Switch checked={groupByBrand} onChange={setGroupByBrand} />
+          <span className="switch-text">За брендом</span>
         </label>
-        <label>
-          <Switch checked={groupByCategory} onChange={setGroupByCategory} /> За
-          категорією
+
+        <label className="switch-item">
+          <Switch checked={groupByCategory} onChange={setGroupByCategory} />
+          <span className="switch-text">За категорією</span>
         </label>
       </div>
-    </>
+    </div>
   );
 };

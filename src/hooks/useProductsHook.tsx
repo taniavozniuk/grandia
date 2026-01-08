@@ -32,7 +32,7 @@ export const useProductsHooks = () => {
         <Image
           width={60}
           height={60}
-          src={url}
+          src={url || '/image/default-product.png'}
           fallback="/image/default-product.png"
           style={{ objectFit: "cover", borderRadius: 8 }}
           preview={false}

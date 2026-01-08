@@ -2,6 +2,7 @@ import { Table } from "antd";
 import { useProductsHooks } from "../hooks/useProductsHook";
 import { ProductColors } from "../ProductColor/ProductColors";
 import "./Table.css";
+
 interface GroupRecord {
   key: string;
   groupName: string;
@@ -13,7 +14,6 @@ export const Tablets = () => {
     columns,
     groupedData,
     loading,
-
     groupByType,
     groupByBrand,
     groupByCategory,
@@ -22,9 +22,9 @@ export const Tablets = () => {
   const hasGrouping = groupByType || groupByBrand || groupByCategory;
 
   return (
-    <div className="tableCon" style={{ padding: 20 }}>
+    <div className="table-container">
       <Table
-        className="customTable"
+        className="custom-table"
         dataSource={groupedData}
         columns={undefined}
         loading={loading}
@@ -33,7 +33,7 @@ export const Tablets = () => {
         expandable={{
           expandedRowRender: (record) => (
             <Table
-              className="innerTable"
+              className="inner-table"
               columns={columns}
               dataSource={record.items}
               pagination={false}
@@ -56,13 +56,15 @@ export const Tablets = () => {
           title="Група"
           key="groupName"
           render={(_, record: GroupRecord) => (
-            <strong>{record.groupName}</strong>
+            <strong className="group-name">{record.groupName}</strong>
           )}
         />
         <Table.Column
           title="Кількість"
           key="count"
-          render={(_, record: GroupRecord) => `${record.items.length} товарів`}
+          render={(_, record: GroupRecord) => (
+            <span className="group-count">{record.items.length} товарів</span>
+          )}
         />
       </Table>
     </div>

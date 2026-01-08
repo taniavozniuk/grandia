@@ -8,11 +8,11 @@ export const ProductColors = ({ product }: { product: Product }) => {
   }
 
   return (
-    <div className="colorCon">
+    <div className="color-container">
       {product.product_colors.map((color) => (
-        <Tag key={color.colour_name} className="color__tag">
+        <Tag key={color.colour_name} className="color-tag">
           <span
-            className="color__span"
+            className="color-span"
             style={{
               backgroundColor: color.hex_value,
             }}

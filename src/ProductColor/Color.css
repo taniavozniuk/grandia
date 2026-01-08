@@ -1,16 +1,16 @@
-.colorCon{
+.color-container{
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
 }
 
-.color__tag{
+.color-tag{
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
-.color__span{
+.color-span{
   width: 12px;
   height: 12px;
   border-radius: 50%;
