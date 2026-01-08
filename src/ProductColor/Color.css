@@ -1,0 +1,19 @@
+.colorCon{
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.color__tag{
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.color__span{
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  display: inline-block;
+}

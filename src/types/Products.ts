@@ -1,5 +1,3 @@
-export type Products = Product[];
-
 export interface Product {
   id: number;
   brand: string;

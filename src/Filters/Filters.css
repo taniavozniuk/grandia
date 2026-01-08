@@ -1,0 +1,10 @@
+.filters {
+  margin: 16px 0;
+}
+
+.ant-select-show-search.filters__select {
+  min-width: 260px;
+  width: 300px;
+  margin-right: 16px;
+  border: 1px solid ;
+}

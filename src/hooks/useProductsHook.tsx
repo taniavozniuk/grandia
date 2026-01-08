@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import type { Product } from "../types/Products";
-import { getProducts } from "../api/api";
+import { getAllFilters, getProducts } from "../api/api";
+import { Image } from "antd";
 
 export type GroupedRecord = {
   key: string;
@@ -19,13 +20,23 @@ export const useProductsHooks = () => {
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
+  const [allBrands, setAllBrands] = useState<string[]>([]);
+  const [allTags, setAllTags] = useState<string[]>([]);
+
   const columns = [
     {
       title: "Зображення",
       dataIndex: "image_link",
       key: "image",
       render: (url: string) => (
-        <img src={url} alt="product" style={{ width: 60, height: 60, objectFit: "cover" }} />
+        <Image
+          width={60}
+          height={60}
+          src={url}
+          fallback="/image/default-product.png"
+          style={{ objectFit: "cover", borderRadius: 8 }}
+          preview={false}
+        />
       ),
     },
     { title: "Назва", dataIndex: "name", key: "name" },
@@ -40,30 +51,6 @@ export const useProductsHooks = () => {
     { title: "Тип продукту", dataIndex: "product_type", key: "type" },
   ];
 
-  const filteredData = useMemo(() => {
-    let result = rawData;
-
-    if (selectedBrands.length > 0) {
-      result = result.filter((p) => p.brand && selectedBrands.includes(p.brand));
-    }
-
-    if (selectedTags.length > 0) {
-      result = result.filter((p) => p.tag_list.some((tag) => selectedTags.includes(tag)));
-    }
-
-    return result;
-  }, [rawData, selectedBrands, selectedTags]);
-
-  const allBrands = useMemo(() => {
-    const brands = filteredData.map((p) => p.brand).filter(Boolean) as string[];
-    return [...new Set(brands)].sort();
-  }, [filteredData]);
-
-  const allTags = useMemo(() => {
-    const tags = filteredData.flatMap((p) => p.tag_list);
-    return [...new Set(tags)].sort();
-  }, [filteredData]);
-
   const groupedData = useMemo<GroupedRecord[]>(() => {
     const hasGrouping = groupByType || groupByBrand || groupByCategory;
 
@@ -72,14 +59,14 @@ export const useProductsHooks = () => {
         {
           key: "all",
           groupName: "Усі продукти",
-          items: filteredData.map((p) => ({ ...p, key: p.id.toString() })),
+          items: rawData.map((p) => ({ ...p, key: p.id.toString() })),
         },
       ];
     }
 
     const groups: Record<string, Product[]> = {};
 
-    filteredData.forEach((product) => {
+    rawData.forEach((product) => {
       const parts = [
         groupByType ? product.product_type : null,
         groupByBrand ? product.brand : null,
@@ -99,16 +86,28 @@ export const useProductsHooks = () => {
         groupName,
         items: items.map((p) => ({ ...p, key: p.id.toString() })),
       }));
-  }, [filteredData, groupByType, groupByBrand, groupByCategory]);
+  }, [rawData, groupByType, groupByBrand, groupByCategory]);
 
   useEffect(() => {
-    getProducts()
+    getAllFilters()
+      .then(({ brands, tags }) => {
+        setAllBrands(brands);
+        setAllTags(tags);
+      })
+      .catch((err) => console.error("Помилка завантаження:", err));
+  }, []);
+
+  useEffect(() => {
+    getProducts({
+      brands: selectedBrands.length > 0 ? selectedBrands : undefined,
+      tags: selectedTags.length > 0 ? selectedTags : undefined,
+    })
       .then((data) => {
         setRawData(data);
       })
-      .catch((err) => console.error("Помилка завантаження:", err))
+      .catch((err) => console.error("Помилка завантаження продуктів:", err))
       .finally(() => setLoading(false));
-  }, []); 
+  }, [selectedBrands, selectedTags]);
 
   return {
     columns,

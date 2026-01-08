@@ -1,10 +1,7 @@
-// components/Tablets.tsx
-import { Divider, Select, Switch, Table } from "antd";
+import { Table } from "antd";
 import { useProductsHooks } from "../hooks/useProductsHook";
-import { ProductColors } from "./ProductColors";
-
-const { Option } = Select;
-
+import { ProductColors } from "../ProductColor/ProductColors";
+import "./Table.css";
 interface GroupRecord {
   key: string;
   groupName: string;
@@ -18,82 +15,25 @@ export const Tablets = () => {
     loading,
 
     groupByType,
-    setGroupByType,
     groupByBrand,
-    setGroupByBrand,
     groupByCategory,
-    setGroupByCategory,
-
-    selectedBrands,
-    setSelectedBrands,
-    allBrands,
-
-    selectedTags,
-    setSelectedTags,
-    allTags,
   } = useProductsHooks();
 
   const hasGrouping = groupByType || groupByBrand || groupByCategory;
 
   return (
-    <div style={{ padding: 20 }}>
-      <Divider>Групування</Divider>
-
-      <div style={{ marginBottom: 16 }}>
-        <Switch checked={groupByType} onChange={setGroupByType} /> За типом
-        продукту
-        <br />
-        <Switch checked={groupByBrand} onChange={setGroupByBrand} /> За брендом
-        <br />
-        <Switch checked={groupByCategory} onChange={setGroupByCategory} /> За
-        категорією
-      </div>
-
-      <Divider>Фільтри</Divider>
-
-      <div style={{ marginBottom: 16 }}>
-        <Select
-          mode="multiple"
-          allowClear
-          placeholder="Оберіть бренди"
-          value={selectedBrands}
-          onChange={setSelectedBrands}
-          style={{ width: 300, marginRight: 16 }}
-        >
-          {allBrands.map((brand) => (
-            <Option key={brand} value={brand}>
-              {brand}
-            </Option>
-          ))}
-        </Select>
-
-        <Select
-          mode="multiple"
-          allowClear
-          placeholder="Оберіть теги"
-          value={selectedTags}
-          onChange={setSelectedTags}
-          style={{ width: 300 }}
-        >
-          {allTags.map((tag) => (
-            <Option key={tag} value={tag}>
-              {tag}
-            </Option>
-          ))}
-        </Select>
-      </div>
-
-      <Divider>Продукти</Divider>
-
+    <div className="tableCon" style={{ padding: 20 }}>
       <Table
+        className="customTable"
         dataSource={groupedData}
         columns={undefined}
         loading={loading}
         rowKey="key"
-        pagination={{ pageSize: 20 }}
+        pagination={false}
         expandable={{
           expandedRowRender: (record) => (
             <Table
+              className="innerTable"
               columns={columns}
               dataSource={record.items}
               pagination={false}
