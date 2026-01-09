@@ -6,6 +6,16 @@ import { useProductsHooks } from "./hooks/useProductsHook";
 
 function App() {
   const products = useProductsHooks();
+  const { loading } = products;
+
+  if (loading) {
+    return (
+      <div className="loading-container">
+        <div className="loading-spinner"></div>
+      </div>
+    );
+  }
+
   return (
     <div className="app-container">
       <header className="app-header">

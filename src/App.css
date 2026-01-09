@@ -77,3 +77,33 @@
 .app-section {
   margin-bottom: 48px;
 }
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.loading-spinner {
+  width: 48px;
+  height: 48px;
+  border: 5px solid #8cc4fb;
+  border-bottom-color: #ff9b7d;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

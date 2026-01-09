@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import type { Product } from "../types/Products";
 import { getAllFilters, getProducts } from "../api/api";
 import { Image } from "antd";
+import defaultImageSrc from "../assets/default-image.png";
 
 export type GroupedRecord = {
   key: string;
@@ -23,6 +24,14 @@ export const useProductsHooks = () => {
   const [allBrands, setAllBrands] = useState<string[]>([]);
   const [allTags, setAllTags] = useState<string[]>([]);
 
+  const handleImageError = (
+    e: React.SyntheticEvent<HTMLImageElement>
+  ) => {
+    const target = e.target as HTMLImageElement;
+    target.src = defaultImageSrc;
+    target.onerror = null;
+  };
+
   const columns = [
     {
       title: "Зображення",
@@ -32,10 +41,10 @@ export const useProductsHooks = () => {
         <Image
           width={60}
           height={60}
-          src={url || "/image/default-product.png"}
-          fallback="/image/default-product.png"
+          src={url || defaultImageSrc}
           style={{ objectFit: "cover", borderRadius: 8 }}
           preview={false}
+          onError={handleImageError}
         />
       ),
     },
